@@ -6,17 +6,19 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
-//  DB Setup
+// DB Setup
 mongoose.connect('mongodb://localhost:auth/auth');
 
-// App Setup - get express working
+// App Setup
 app.use(morgan('combined'));
+app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 
-// Server Setup - get express talking to the outside world
+// Server Setup
 const port = process.env.PORT || 3090;
 const server = http.createServer(app);
 server.listen(port);
-console.log('Server listening on:', port );
+console.log('Server listening on:', port);
