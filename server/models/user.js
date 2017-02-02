@@ -1,4 +1,4 @@
-const mongoose = request('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define out model
@@ -8,7 +8,7 @@ const userSchema = new Schema({
   activation: { type: String, unique: true }
 });
 // Create the model class
-const model = mongoose.model('user', userSchema);
+const ModelClass = mongoose.model('user', userSchema);
 
 //  Export the model
 module.exports = ModelClass;
