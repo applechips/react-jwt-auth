@@ -5,6 +5,10 @@ exports.signup = function(req, res, next) {
   const password = req.body.password;
   const activation = req.body.activation;
   console.log(username, password, activation);
+
+  if (!username || !password || !activation) {
+    return res.status(422).send({ error: 'You must provide username, password, and activation code'});
+  }
   // see if a user with given username exists
   User.findOne({ username: username }, function(err, existingUser) {
      if (err) { return next(err); }
