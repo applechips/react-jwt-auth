@@ -16,6 +16,7 @@ User.findOne({ username: username }, function(err, user) {
   if (!user) { return done(null, false); }
 
   // compare passwords - is 'password' equal to user.password?
+  
 })
 });
 // Setup options for JWT Strategy
