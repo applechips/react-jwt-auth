@@ -5,32 +5,12 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require('passport-local');
 
-// // Create local Strategy
-// const localOptions = { usernameField: 'username'};
-// const localLogin = new LocalStrategy( localOptions, function(username, password, activation, done) {
-// // verify this username, password & activation code, call done with the user
-// // if it is the correct username, password & activation code
-// // otherwise, call done with false
-// User.findOne({ username: username }, function(err, user) {
-//   if (err) { return done(err); }
-//   if (!user) { return done(null, false); }
-//
-//   // compare passwords - is 'password' equal to user.password?
-//   user.comparePassword(password, function(err, isMatch) {
-//     if (err) { return done(err); }
-//     if (!isMatch) { return done(null, false); }
-//
-//     return done(null, user);
-//   });
-// });
-// });
-
-
 // Create local strategy
 const localOptions = { usernameField: 'username' };
-const localLogin = new LocalStrategy(localOptions, function(username, password, activation, done) {
-  // Verify this email and password, call done with the user
-  // if it is the correct email and password
+// const localLogin = new LocalStrategy(localOptions, function(username, password, activation, done) {
+const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
+  // verify this username, password & activation code, call done with the user
+  // if it is the correct username, password & activation code
   // otherwise, call done with false
   User.findOne({ username: username }, function(err, user) {
     if (err) { return done(err); }
@@ -43,7 +23,23 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
 
       return done(null, user);
     });
+
   });
+  // const localLogin = new LocalStrategy(localOptions, function(activation, done){
+  //
+  //   User.findOne({ activation: activation }, function(err, activation) {
+  //     if (err) { return done(err); }
+  //     if (!user) { return done(null, false); }
+  //
+  //     user.compareActivation(activation, function(err, isMatch) {
+  //       if (err) { return done(err); }
+  //       if (!isMatch) { return done(null, false); }
+  //
+  //       return done(null, user);
+  //     });
+  //   });
+  //
+  // });
 });
 
 // Setup options for JWT Strategy
