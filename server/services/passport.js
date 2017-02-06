@@ -8,7 +8,7 @@ const LocalStrategy = require('passport-local');
 // Create local strategy
 const localOptions = { usernameField: 'username' };
 // const localLogin = new LocalStrategy(localOptions, function(username, password, activation, done) {
-const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
+const localLogin = new LocalStrategy( function(username, password, done) {
   // verify this username, password & activation code, call done with the user
   // if it is the correct username, password & activation code
   // otherwise, call done with false
@@ -24,22 +24,14 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
       return done(null, user);
     });
 
+    // user.compareActivation(activation, function(err, isMatch) {
+    //   if (err) { return done(err); }
+    //   if (!isMatch) { return done(null, false); }
+    //
+    //   return done(null, user);
+    // });
+
   });
-  // const localLogin = new LocalStrategy(localOptions, function(activation, done){
-  //
-  //   User.findOne({ activation: activation }, function(err, activation) {
-  //     if (err) { return done(err); }
-  //     if (!user) { return done(null, false); }
-  //
-  //     user.compareActivation(activation, function(err, isMatch) {
-  //       if (err) { return done(err); }
-  //       if (!isMatch) { return done(null, false); }
-  //
-  //       return done(null, user);
-  //     });
-  //   });
-  //
-  // });
 });
 
 // Setup options for JWT Strategy
